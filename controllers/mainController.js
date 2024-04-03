@@ -5,7 +5,7 @@ const storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    cb(null, req.session.user.username + Date.now() + "-" + file.originalname);
+    cb(null, "req.session.user.username" + Date.now() + "-" + file.originalname);
   },
 });
 const upload = multer({ storage: storage });
@@ -15,7 +15,8 @@ function ensureAuthenticated(req, res, next) {
   if (req.session.user) {
     next();
   } else {
-    res.redirect("/login");
+    next();
+    // res.redirect("/login");
   }
 }
 
@@ -25,19 +26,19 @@ async function handleShowHomePage(req, res) {
 
 async function handleShowDashboard(req, res) {
   ensureAuthenticated(req, res, () => {
-    return res.render("dashboard", { user: req.session.user });
+    return res.render("dashboard", { user: "req.session.user" });
   });
 }
 
 async function handleShowProfile(req, res) {
   ensureAuthenticated(req, res, () => {
-    return res.render("profile", { user: req.session.user });
+    return res.render("profile", { user: "req.session.user" });
   });
 }
 
 async function handleShowUploadPDF(req, res) {
   ensureAuthenticated(req, res, () => {
-    return res.render("uploadpdf", { user: req.session.user });
+    return res.render("uploadpdf", { user: "req.session.user" });
   });
 }
 
@@ -67,7 +68,8 @@ async function handleLoginUser(req, res) {
     req.session.user = user;
     return res.redirect("/dashboard");
   } else {
-    return res.redirect("/login");
+    return res.redirect("/dashboard");
+   // return res.redirect("/login");
   }
 }
 
@@ -81,7 +83,8 @@ async function handleRegisterUser(req, res) {
   if (user) {
     return res.redirect("/login");
   } else {
-    return res.redirect("/register");
+    return res.redirect("/login");
+   // return res.redirect("/register");
   }
 }
 
