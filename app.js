@@ -8,19 +8,19 @@ const mainRouter = require("./routes/index.js");
 const bodyParser = require("body-parser");
 
 // Database connection
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "test",
-});
+// const db = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "password",
+//   database: "test",
+// });
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log("Connected to database");
-});
+// db.connect((err) => {
+//   if (err) throw err;
+//   console.log("Connected to database");
+// });
 
-global.db = db;
+// global.db = db;
 
 app.use(
   session({
