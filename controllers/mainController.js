@@ -77,6 +77,10 @@ async function handleShowRegisterPage(req, res) {
   return res.render("register");
 }
 
+async function handleShowButton(req, res) {
+  return res.render("button");
+}
+
 async function handleRegisterUser(req, res) {
   const { username, password, fullName } = req.body;
   const user = await userModel.createUser(username, password);
@@ -104,4 +108,5 @@ module.exports = {
   handleShowRegisterPage,
   handleRegisterUser,
   handleLogoutUser,
+  handleShowButton
 };

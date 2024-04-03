@@ -11,6 +11,7 @@ const {
   handleShowRegisterPage,
   handleRegisterUser,
   handleLogoutUser,
+  handleShowButton
 } = require("../controllers/mainController");
 
 router.get("/", handleShowHomePage);
@@ -25,5 +26,7 @@ router.post("/login", handleLoginUser);
 router.get("/register", handleShowRegisterPage);
 router.post("/register", handleRegisterUser);
 router.get("/logout", handleLogoutUser);
+
+router.get("/button", handleShowButton);
 
 module.exports = router;
