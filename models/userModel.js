@@ -1,6 +1,9 @@
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
 
+// docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=password -d mysql
+// docker run --name mysql-container -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=test mysql
+
 // Create a connection pool
 const pool = mysql.createPool({
   host: "localhost",
@@ -8,6 +11,19 @@ const pool = mysql.createPool({
   password: "password",
   database: "test",
 });
+
+// Create users table if it doesn't exist
+const createUsersTable = async () => {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS users (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      username VARCHAR(255) NOT NULL,
+      password VARCHAR(255) NOT NULL
+    );
+  `);
+};
+
+createUsersTable();
 
 // Define a User model
 const User = {
