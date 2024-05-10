@@ -1,3 +1,6 @@
+# pip install pypdf
+# pip install tabula-py
+
 # importing required modules 
 from pypdf import PdfReader 
 import json
