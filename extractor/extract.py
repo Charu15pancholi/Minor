@@ -3,6 +3,7 @@
 
 # importing required modules 
 from pypdf import PdfReader 
+import pandas as pd
 import json
 
 # creating a pdf reader object 
@@ -76,3 +77,9 @@ json_data = json.dumps(data, indent=4)
 # Write the JSON string to a file
 with open('data.json', 'w') as f:
     f.write(json_data)
+
+# Convert the data to a DataFrame
+df = pd.json_normalize(data, 'Subjects', ['Name', 'Roll no.', 'Course', 'Branch', 'Semester', 'Status', 'Result', 'SGPA', 'CGPA'])
+
+# Write the DataFrame to an Excel file
+df.to_excel('data.xlsx', index=False)
